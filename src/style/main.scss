@@ -1,0 +1,10 @@
+@use "./abstracts/variables";
+
+@use "./layouts/header";
+@use "./layouts/studentInformation";
+@use "./layouts/SearchBar";
+@use "./layouts/form";
+@use "./layouts/logout";
+
+@use "./pages/attendance";
+@use "./pages/login";

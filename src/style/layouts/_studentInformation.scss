@@ -1,0 +1,9 @@
+@use "../abstracts/variables" as *;
+
+.StudentInformation {
+  width: 100%;
+  height: 20rem;
+  background-color: $base;
+  grid-area: info;
+  border-radius: 10px;
+}

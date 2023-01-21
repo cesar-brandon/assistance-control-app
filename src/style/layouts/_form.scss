@@ -1,0 +1,26 @@
+@use "../../style/abstracts/variables" as *;
+@use "../../style/abstracts/mixins" as *;
+
+.Form {
+  padding: 2rem;
+  box-sizing: border-box;
+  display: grid;
+
+  &_personal {
+    display: flex;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  &_error {
+    font-size: 12px;
+    color: #ff2e4d;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: $sm) {
+  .Form {
+    padding: 2rem 1rem 2rem 1rem;
+  }
+}

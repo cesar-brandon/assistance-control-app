@@ -1,0 +1,17 @@
+.Attendance {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  &__register {
+    margin-top: 5rem;
+    width: 70%;
+    display: grid;
+    grid-template:
+      "table search" 5%
+      "table info" 1fr /
+      70% 1fr;
+    gap: 2rem;
+  }
+}
