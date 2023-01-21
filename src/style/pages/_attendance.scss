@@ -6,12 +6,12 @@
 
   &__register {
     margin-top: 5rem;
-    width: 70%;
+    width: 60%;
     display: grid;
     grid-template:
-      "table search" 5%
-      "table info" 1fr /
-      70% 1fr;
+      "search ." 5%
+      "table table" 1fr /
+      1fr 1fr;
     gap: 2rem;
   }
 }

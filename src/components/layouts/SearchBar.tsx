@@ -3,15 +3,11 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-const Search = styled("div")(({ theme }) => ({
+const Search = styled("div")(() => ({
   position: "relative",
   marginLeft: 0,
   width: "100%",
   height: 40,
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -27,25 +23,24 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
+  width: "100%",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
   },
 }));
 
 const SearchBar: React.FC = () => {
   return (
     <div className="SearchBar">
-      <Search sx={{ border: 1, borderColor: "grey.300", borderRadius: "10px" }}>
+      <Search
+        sx={{
+          border: 1,
+          borderColor: "#999",
+          borderRadius: "10px",
+        }}
+      >
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>

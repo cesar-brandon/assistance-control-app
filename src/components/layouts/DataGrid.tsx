@@ -7,22 +7,39 @@ interface Props {
   columns: GridColDef[];
 }
 
+const style = {
+  border: 1,
+  borderColor: "#999",
+  borderRadius: "10px",
+  "& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-cell:focus": {
+    outline: "none",
+  },
+  "& .MuiDataGrid-columnHeader:focus-within, & .MuiDataGrid-columnHeader:focus":
+    {
+      outline: "none !important",
+    },
+};
+
 const DataGrid: React.FC<Props> = ({ rows, columns }) => {
   return (
-    <Box
-      sx={{
-        height: 400,
-        width: "100%",
-      }}
-    >
-      <DataGridMui
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        disableSelectionOnClick
-      />
-    </Box>
+    <div className="DataGrid__content">
+      <Box
+        sx={{
+          height: 500,
+          width: "100%",
+        }}
+      >
+        <DataGridMui
+          sx={style}
+          rows={rows}
+          columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[5]}
+          disableSelectionOnClick
+          disableColumnMenu
+        />
+      </Box>
+    </div>
   );
 };
 

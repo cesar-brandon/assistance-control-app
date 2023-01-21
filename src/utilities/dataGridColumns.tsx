@@ -3,6 +3,7 @@ import Chip from "@mui/material/Chip";
 import DoneIcon from "@mui/icons-material/Done";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { red, green } from "@mui/material/colors";
+import { Avatar } from "../components/common";
 
 function getChipProps(params: GridRenderCellParams) {
   if (params.value === "puntual") {
@@ -10,6 +11,7 @@ function getChipProps(params: GridRenderCellParams) {
       icon: <DoneIcon color="success" />,
       label: params.value,
       sx: {
+        width: "90%",
         borderColor: green[500],
         color: green[500],
       },
@@ -20,6 +22,7 @@ function getChipProps(params: GridRenderCellParams) {
       icon: <WarningAmberIcon color="warning" />,
       label: params.value,
       sx: {
+        width: "90%",
         borderColor: red[500],
         color: red[500],
       },
@@ -27,7 +30,27 @@ function getChipProps(params: GridRenderCellParams) {
   }
 }
 
+const handleChipClick = (params: GridRenderCellParams) => {
+  // change params.row.register
+  let state = params.row.register;
+  state === "puntual" ? (state = "pendiente") : (state = "puntual");
+};
+
+export const raceColors: { [key: string]: string } = {
+  DSI: "#FFC107",
+  ENF: "#20c997",
+  FRM: "#4488cc",
+  AE: "#c197db",
+  CF: "#DC3545",
+};
+
 export const columns: GridColDef[] = [
+  {
+    field: "avatar",
+    headerName: "AVATAR",
+    width: 80,
+    renderCell: (params: GridRenderCellParams) => <Avatar params={params} />,
+  },
   {
     field: "id",
     headerName: "CODIGO",
@@ -64,7 +87,14 @@ export const columns: GridColDef[] = [
     headerName: "REGISTRO",
     minWidth: 150,
     renderCell: (params: GridRenderCellParams) => {
-      return <Chip variant="outlined" size="small" {...getChipProps(params)} />;
+      return (
+        <Chip
+          variant="outlined"
+          size="small"
+          onClick={handleChipClick}
+          {...getChipProps(params)}
+        />
+      );
     },
   },
 ];
