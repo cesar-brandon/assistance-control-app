@@ -11,19 +11,9 @@ const Style = {
   },
 };
 
-interface Props {
-  event: React.MouseEventHandler<HTMLButtonElement>;
-}
-
-const Button: React.FC<Props> = ({ event }) => {
+const Button: React.FC = () => {
   return (
-    <ButtonUi
-      onClick={() => event()}
-      sx={Style}
-      type="submit"
-      variant="contained"
-      disableElevation
-    >
+    <ButtonUi sx={Style} type="submit" variant="contained" disableElevation>
       Aceptar
     </ButtonUi>
   );

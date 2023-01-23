@@ -1,3 +1,5 @@
+import { IAssistance } from "./assistance";
+
 export interface IStudent {
   id: number;
   lastname: string;
@@ -5,5 +7,14 @@ export interface IStudent {
   specialty: string;
   group: string;
   module: string;
-  register: number;
+}
+
+export interface IStudentAssistance {
+  id: number;
+  lastname: string;
+  name: string;
+  specialty: string;
+  group: string;
+  module: string;
+  assistances: IAssistance[];
 }

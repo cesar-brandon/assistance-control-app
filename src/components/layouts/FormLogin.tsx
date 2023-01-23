@@ -1,19 +1,37 @@
-import { Formik, Form, FormikErrors } from "formik";
-import TextField from "@mui/material/TextField";
-import InputPassword from "../common/InputPassword";
-import Button from "../common/Button";
+import { Formik, FormikErrors } from "formik";
+import { useNavigate } from "react-router-dom";
+import { login } from "../../api/login";
+import { PrivateRoutes } from "../../router/routes";
+import { Form } from "../common";
 
-interface MyFormValues {
+export interface IFormLogin {
   email: string;
   password: string;
 }
 
-interface Props {
-  event: React.MouseEventHandler<HTMLButtonElement>;
-}
+const validate = (values: IFormLogin) => {
+  let error: FormikErrors<IFormLogin> = {};
+  if (!values.email) error.email = "Ingrese su correo";
 
-const FormLogin: React.FC<Props> = ({ event }) => {
-  const initialValues: MyFormValues = { email: "", password: "" };
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email))
+    error.email = "Ingresa un correo válido";
+
+  if (!values.password) error.password = "Ingresa tu contraseña";
+
+  return error;
+};
+
+const FormLogin: React.FC = () => {
+  const initialValues: IFormLogin = { email: "", password: "" };
+  const navigate = useNavigate();
+
+  const onSubmit = async (values: IFormLogin) => {
+    const response = await login(values);
+
+    if (response) {
+      navigate(`/${PrivateRoutes.ATTENDANCE}`, { replace: true });
+    }
+  };
 
   return (
     <>
@@ -25,26 +43,8 @@ const FormLogin: React.FC<Props> = ({ event }) => {
       </div>
       <Formik
         initialValues={initialValues}
-        validate={(values: MyFormValues) => {
-          let errors: FormikErrors<MyFormValues> = {};
-
-          if (!values.email) {
-            errors.email = "Ingrese su correo";
-          } else if (
-            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-          ) {
-            errors.email = "Dirección de correo electrónico no válida";
-          }
-
-          if (!values.password) {
-            errors.password = "Ingrese su contraseña";
-          }
-          return errors;
-        }}
-        onSubmit={(values, { resetForm }) => {
-          resetForm();
-          console.log(values, "Datos enviados");
-        }}
+        validate={validate}
+        onSubmit={onSubmit}
       >
         {({
           values,
@@ -54,33 +54,14 @@ const FormLogin: React.FC<Props> = ({ event }) => {
           handleBlur,
           handleSubmit,
         }) => (
-          <Form className="Form" onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              id="email"
-              label="Correo"
-              name="email"
-              value={values.email}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {touched.email && errors.email && (
-              <div className="Form_error">{errors.email}</div>
-            )}
-
-            <InputPassword
-              id={"password"}
-              name={"password"}
-              value={values.password}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-            />
-            {touched.password && errors.password && (
-              <div className="Form_error">{errors.password}</div>
-            )}
-
-            <Button event={event} />
-          </Form>
+          <Form
+            values={values}
+            errors={errors}
+            touched={touched}
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+            handleSubmit={handleSubmit}
+          />
         )}
       </Formik>
       <div className="footer">Instituto Federico Villareal</div>

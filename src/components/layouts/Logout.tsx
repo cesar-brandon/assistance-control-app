@@ -1,17 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resetEmployee } from "../../redux/states/employee";
+import { LocalStorageTypes } from "../../models/localstorage";
 import { PublicRoutes } from "../../router/routes";
+import { clearLocalStorage } from "../../utilities/localStorage.utility";
 
 const Logout: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const currentPath = window.location.pathname.slice(1);
 
   const logOut = () => {
-    dispatch(resetEmployee());
+    clearLocalStorage(LocalStorageTypes.TOKEN);
     navigate(PublicRoutes.LOGIN, { replace: true });
   };
 

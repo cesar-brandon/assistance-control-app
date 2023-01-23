@@ -1,4 +1,5 @@
 export enum LocalStorageTypes {
   STUDENT = "student",
-  EMPLOYEE = "employee",
+  USER = "user",
+  TOKEN = "token",
 }

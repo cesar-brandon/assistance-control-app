@@ -25,7 +25,7 @@ const DataGrid: React.FC<Props> = ({ rows, columns }) => {
     <div className="DataGrid__content">
       <Box
         sx={{
-          height: 500,
+          height: "77.6%",
           width: "100%",
         }}
       >
@@ -34,7 +34,7 @@ const DataGrid: React.FC<Props> = ({ rows, columns }) => {
           rows={rows}
           columns={columns}
           pageSize={10}
-          rowsPerPageOptions={[5]}
+          rowsPerPageOptions={[10]}
           disableSelectionOnClick
           disableColumnMenu
         />

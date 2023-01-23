@@ -1,5 +1,5 @@
 import React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -31,7 +31,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const SearchBar: React.FC = () => {
+interface Props {
+  searchText: string;
+  setSearchText: (searchText: string) => void;
+}
+
+const SearchBar: React.FC<Props> = ({ searchText, setSearchText }) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
+  };
   return (
     <div className="SearchBar">
       <Search
@@ -45,8 +53,9 @@ const SearchBar: React.FC = () => {
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-          placeholder="Codigo..."
+          placeholder="Buscar..."
           inputProps={{ "arial-label": "search" }}
+          onChange={handleSearch}
         />
       </Search>
     </div>

@@ -63,3 +63,14 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .Login {
+    &__card {
+      grid-template-columns: 1fr;
+    }
+    &__content_image {
+      display: none;
+    }
+  }
+}
