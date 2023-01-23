@@ -2,36 +2,26 @@ import React, { useState } from "react";
 import Skeleton from "@mui/material/Skeleton";
 import { DataGrid, SearchBar } from "../components/layouts";
 import useStudents from "../hooks/useStudents";
-import { IStudentAssistance } from "../models/student";
-import { columns } from "../utilities/dataGridColumns";
 import { Layout } from "../components/common";
+import { useDispatch } from "react-redux";
+import { setStudent } from "../redux/states/student";
 
 const Attendance: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const { students, loading } = useStudents();
 
-  const rowsStudents = students.map((student: IStudentAssistance) => ({
-    id: student.id,
-    lastname: student.lastname,
-    name: student.name,
-    specialty: student.specialty,
-    group: student.group,
-    module: student.module,
-    assistance: student.assistances
-      .map((assistance) => assistance.status)
-      .join(", "),
-  }));
+  const dispatch = useDispatch();
 
-  const filteredRowsStudents = rowsStudents.filter(
+  const filteredRowsStudents = students.filter(
     (row) =>
       row.id.toString().includes(searchText) ||
       row.name.includes(searchText) ||
       row.lastname.includes(searchText) ||
       row.specialty.includes(searchText) ||
       row.group.includes(searchText) ||
-      row.module.includes(searchText) ||
-      row.assistance.includes(searchText)
+      row.module.includes(searchText)
   );
+  dispatch(setStudent(filteredRowsStudents));
 
   return (
     <Layout title="Asistencia">
@@ -45,7 +35,9 @@ const Attendance: React.FC = () => {
               height={"77.6%"}
             />
           ) : (
-            <DataGrid rows={filteredRowsStudents} columns={columns} />
+            <>
+              <DataGrid />
+            </>
           )}
           <SearchBar searchText={searchText} setSearchText={setSearchText} />
         </div>

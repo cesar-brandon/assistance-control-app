@@ -21,7 +21,20 @@ export default function useStudents() {
           "Authorization"
         ] = `Bearer ${ACCESS_TOKEN}`;
         const response = await axios.get(`${API_URL}/students`);
-        setStudents(response.data);
+        const rowsStudents = response.data.map(
+          (student: IStudentAssistance) => ({
+            id: student.id,
+            lastname: student.lastname,
+            name: student.name,
+            specialty: student.specialty,
+            group: student.group,
+            module: student.module,
+            status: student.assistances
+              .map((assistance) => assistance.status)
+              .join(", "),
+          })
+        );
+        setStudents(rowsStudents);
       } catch (err) {
         return err;
       }

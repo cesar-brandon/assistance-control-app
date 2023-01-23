@@ -5,3 +5,7 @@ export interface IAssistance {
   createAt: string;
   updateAt: string;
 }
+
+export interface IAssistanceState {
+  currentAssistance: IAssistance | null;
+}
