@@ -26,3 +26,4 @@ dist-ssr
 # folder api 
 
 src/api/config.ts
+.env
