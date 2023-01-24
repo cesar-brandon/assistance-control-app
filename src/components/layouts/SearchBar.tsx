@@ -24,10 +24,17 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   width: "100%",
+  border: "1px solid #ccc",
+  borderRadius: "10px",
+
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
+  },
+  "& .MuiInputBase-input:focus": {
+    outline: "1px solid #999",
+    borderRadius: "10px",
   },
 }));
 
@@ -42,13 +49,7 @@ const SearchBar: React.FC<Props> = ({ searchText, setSearchText }) => {
   };
   return (
     <div className="SearchBar">
-      <Search
-        sx={{
-          border: 1,
-          borderColor: "#999",
-          borderRadius: "10px",
-        }}
-      >
+      <Search>
         <SearchIconWrapper>
           <SearchIcon />
         </SearchIconWrapper>

@@ -17,8 +17,7 @@ import { updateStatus } from "../../redux/states/student";
 import { updateAssistanceStatus } from "../../api/assistance";
 
 const style = {
-  border: 1,
-  borderColor: "#999",
+  boxShadow: "13px 19px 71px -35px rgba(0, 0, 0, 0.75)",
   borderRadius: "10px",
   "& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-cell:focus": {
     outline: "none",
