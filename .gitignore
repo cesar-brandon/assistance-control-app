@@ -24,6 +24,3 @@ dist-ssr
 *.sw?
 
 # folder api 
-
-src/api/config.ts
-.env
