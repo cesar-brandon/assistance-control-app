@@ -1,0 +1,31 @@
+.LinearProgress {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 4.8px;
+  display: inline-block;
+  background: #95c1ed;
+  overflow: hidden;
+  &::after {
+    content: "";
+    width: 30rem;
+    height: 4.8px;
+    background: #4488cc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    animation: animloader 1s linear infinite;
+  }
+}
+
+@keyframes animloader {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(0%);
+  }
+}

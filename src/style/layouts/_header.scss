@@ -2,7 +2,7 @@
   width: 100vw;
 
   &__dashboard {
-    width: 100%;
+    width: 100vw;
     background-color: #f38911;
     padding: 0 2rem;
     height: 4rem;
@@ -11,6 +11,7 @@
     justify-content: center;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
+    overflow: hidden;
 
     &__home {
       cursor: pointer;
@@ -25,7 +26,7 @@
       .slash {
         color: #fff;
         font-size: 1.5rem;
-        font-weight: 500;
+        font-weight: 200;
         margin: 0 1rem;
       }
 
@@ -36,7 +37,7 @@
         font-size: 0.8rem;
         font-weight: 500;
         p {
-          color: #000;
+          color: #fff;
           font-weight: 600;
         }
         .chip {
@@ -50,6 +51,7 @@
   }
 
   &__submenu {
+    width: 100vw;
     height: 3rem;
   }
 }

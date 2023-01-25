@@ -8,12 +8,12 @@
 
   &__register {
     margin-top: 3rem;
-    width: 60%;
+    width: 73%;
     display: grid;
     grid-template:
-      "search ." 5%
-      "table table" 1fr /
-      1fr 1fr;
+      "search tracker" 5%
+      "table card" 1fr /
+      1fr 24rem;
     gap: 2rem;
   }
 }
@@ -23,7 +23,7 @@
     &__register {
       width: 80%;
       grid-template:
-        "search search" 5%
+        "search tracker" 5%
         "table table" 1fr /
         1fr 1fr;
     }

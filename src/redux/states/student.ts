@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { LocalStorageTypes } from "../../models/localstorage";
-import { IStudentState } from "../../models/student";
+import { IEmptyStudentState, IStudentState } from "../../models/student";
 import {
   getLocalStorage,
   setLocalStorage,
 } from "../../utilities/localStorage.utility";
 
-const emptyStudent: IStudentState[] = [];
+const emptyStudent: IEmptyStudentState = {
+  students: [],
+  selectedStudent: null,
+};
 
 export const studentSlice = createSlice({
   name: "student",
@@ -14,22 +17,38 @@ export const studentSlice = createSlice({
     ? JSON.parse(getLocalStorage(LocalStorageTypes.STUDENT) as string)
     : emptyStudent,
   reducers: {
-    setStudent: (state, action) => {
-      setLocalStorage(LocalStorageTypes.STUDENT, state);
-      return action.payload;
+    setStudents: (state, action) => {
+      const result = {
+        ...state,
+        students: action.payload,
+      };
+      setLocalStorage(LocalStorageTypes.STUDENT, result);
+      return result;
     },
     updateStatus: (state, action) => {
       const { id, status } = action.payload;
 
-      const student = state.find((student: IStudentState) => student.id === id);
+      const student = state.students.find(
+        (student: IStudentState) => student.id === id
+      );
       if (student) {
         student.status = status;
       }
-      setLocalStorage(LocalStorageTypes.STUDENT, state);
+      setLocalStorage(LocalStorageTypes.STUDENT, state.students);
       return state;
+    },
+    selectStudent: (state, action) => {
+      const result = {
+        ...state,
+        selectedStudent: action.payload,
+      };
+
+      setLocalStorage(LocalStorageTypes.STUDENT, result);
+      return result;
     },
   },
 });
 
-export const { setStudent, updateStatus } = studentSlice.actions;
+export const { setStudents, updateStatus, selectStudent } =
+  studentSlice.actions;
 export default studentSlice.reducer;

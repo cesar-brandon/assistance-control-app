@@ -1,0 +1,102 @@
+.StudentCard {
+  width: 100%;
+  height: auto;
+  max-height: 74.8%;
+  display: flex;
+  transition: all 300ms;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+
+  &__specialty {
+    width: 4rem;
+    height: 100%;
+    background-color: #d2d2d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      font-size: 1rem;
+      font-weight: 600;
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+      color: #fff;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    display: grid;
+    padding-top: 2rem;
+  }
+
+  &__header {
+    width: 100%;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+    position: relative;
+
+    img {
+      width: 4rem;
+    }
+    p {
+      background-color: #999;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+  }
+
+  &__student {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  &__information {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .specialty {
+      width: 15rem;
+      padding: 0.5rem 1rem;
+      background-color: #ffc107;
+      color: #000;
+      font-weight: 600;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    img {
+      width: 8rem;
+    }
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5rem;
+    height: 0.8rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    box-shadow: inset 12px 6px 17px 0px rgba(0, 0, 0, 0.2);
+  }
+}

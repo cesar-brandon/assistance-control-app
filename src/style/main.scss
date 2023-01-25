@@ -2,6 +2,8 @@
 @use "./abstracts/variables";
 
 // use all components
+@use "./components/studentCard";
+@use "./components/linearProgress";
 
 // use all layouts
 @use "./layouts/header";
@@ -9,8 +11,9 @@
 @use "./layouts/searchBar";
 @use "./layouts/form";
 @use "./layouts/logout";
-@use "./layouts/datagrid";
 @use "./layouts/clock";
+@use "./layouts/accountMenu";
+@use "./layouts/datagrid";
 
 // use all pages
 @use "./pages/attendance";

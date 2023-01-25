@@ -1,22 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import {
   GridRenderCellParams,
   DataGrid as DataGridMui,
   GridColDef,
+  GridRowParams,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import { IAppStore } from "../../redux/store";
 import {} from "@mui/x-data-grid";
 import Chip from "@mui/material/Chip";
 import DoneIcon from "@mui/icons-material/Done";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import { red, green } from "@mui/material/colors";
 import { Avatar } from "../common";
-import { updateStatus } from "../../redux/states/student";
+import { selectStudent, updateStatus } from "../../redux/states/student";
 import { updateAssistanceStatus } from "../../api/assistance";
+import { Skeleton } from "@mui/material";
 
 const style = {
+  bgcolor: "#fff",
   boxShadow: "13px 19px 71px -35px rgba(0, 0, 0, 0.75)",
   borderRadius: "10px",
   "& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-cell:focus": {
@@ -62,7 +64,7 @@ export const raceColors: { [key: string]: string } = {
 
 const DataGrid: React.FC = () => {
   const dispatch = useDispatch();
-  const rowsStudents = useSelector((state: IAppStore) => state.student);
+
   const handleChipClick = (params: GridRenderCellParams) => {
     let status = params.value === "Puntual" ? "Ausente" : "Puntual";
     updateAssistanceStatus(params.row.id, status);
@@ -100,17 +102,17 @@ const DataGrid: React.FC = () => {
     {
       field: "specialty",
       headerName: "ESPECIALIDAD",
-      minWidth: 150,
+      minWidth: 10,
     },
     {
       field: "group",
       headerName: "GRUPO",
-      minWidth: 120,
+      minWidth: 10,
     },
     {
       field: "module",
       headerName: "MODULO",
-      minWidth: 100,
+      minWidth: 10,
     },
     {
       field: "status",
@@ -128,24 +130,36 @@ const DataGrid: React.FC = () => {
       },
     },
   ];
+
+  const rowsStudents = useSelector((state: any) => state.student.students);
+
+  const selectStudentFromRow = (params: GridRowParams) => {
+    dispatch(selectStudent(params.row));
+  };
+
   return (
     <div className="DataGrid__content">
-      <Box
-        sx={{
-          height: "77.6%",
-          width: "100%",
-        }}
-      >
-        <DataGridMui
-          sx={style}
-          rows={rowsStudents}
-          columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          disableSelectionOnClick
-          disableColumnMenu
-        />
-      </Box>
+      {!rowsStudents ? (
+        <Skeleton variant="rounded" width={"100%"} height={"74.8%"} />
+      ) : (
+        <Box
+          sx={{
+            height: "74.8%",
+            width: "100%",
+          }}
+        >
+          <DataGridMui
+            onRowClick={(params: GridRowParams) => selectStudentFromRow(params)}
+            sx={style}
+            rows={rowsStudents}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            disableSelectionOnClick
+            disableColumnMenu
+          />
+        </Box>
+      )}
     </div>
   );
 };

@@ -28,3 +28,8 @@ export interface IStudentState {
   module: string;
   status: string;
 }
+
+export interface IEmptyStudentState {
+  students: IStudentState[];
+  selectedStudent: IStudentState | null;
+}

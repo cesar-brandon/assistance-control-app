@@ -19,6 +19,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "center",
   color: "#999",
+  zIndex: 1,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -26,6 +27,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
   border: "1px solid #ccc",
   borderRadius: "10px",
+  backgroundColor: "#fff",
 
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
@@ -39,14 +41,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 interface Props {
-  searchText: string;
-  setSearchText: (searchText: string) => void;
+  setSearchText: (value: string) => void;
 }
 
-const SearchBar: React.FC<Props> = ({ searchText, setSearchText }) => {
+const SearchBar: React.FC<Props> = ({ setSearchText }) => {
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
+
   return (
     <div className="SearchBar">
       <Search>

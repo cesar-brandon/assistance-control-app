@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import Skeleton from "@mui/material/Skeleton";
-import { DataGrid, SearchBar } from "../components/layouts";
+import { AttendanceTracker, DataGrid, SearchBar } from "../components/layouts";
+import { Layout, StudentCard } from "../components/common";
 import useStudents from "../hooks/useStudents";
-import { Layout } from "../components/common";
 import { useDispatch } from "react-redux";
-import { setStudent } from "../redux/states/student";
+import { setStudents } from "../redux/states/student";
 
 const Attendance: React.FC = () => {
   const [searchText, setSearchText] = useState("");
-  const { students, loading } = useStudents();
-
+  const { students } = useStudents();
   const dispatch = useDispatch();
-
   const filteredRowsStudents = students.filter(
     (row) =>
       row.id.toString().includes(searchText) ||
@@ -21,25 +18,15 @@ const Attendance: React.FC = () => {
       row.group.includes(searchText) ||
       row.module.includes(searchText)
   );
-  dispatch(setStudent(filteredRowsStudents));
-
+  dispatch(setStudents(filteredRowsStudents));
   return (
     <Layout title="Asistencia">
       <div className="Attendance">
         <div className="Attendance__register">
-          {loading ? (
-            <Skeleton
-              className="DataGrid__content"
-              variant="rounded"
-              width={"100%"}
-              height={"77.6%"}
-            />
-          ) : (
-            <>
-              <DataGrid />
-            </>
-          )}
-          <SearchBar searchText={searchText} setSearchText={setSearchText} />
+          <DataGrid />
+          <SearchBar setSearchText={setSearchText} />
+          <AttendanceTracker />
+          <StudentCard />
         </div>
       </div>
     </Layout>

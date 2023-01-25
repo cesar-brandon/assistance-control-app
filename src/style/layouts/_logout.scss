@@ -1,17 +1,5 @@
 .Logout {
-  justify-self: end;
-  &__button {
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-
-    p {
-      font-weight: 500;
-    }
-    svg {
-      width: 2.2rem;
-    }
-  }
+  width: 100%;
+  display: flex;
+  align-items: center;
 }

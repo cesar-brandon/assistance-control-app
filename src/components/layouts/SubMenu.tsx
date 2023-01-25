@@ -45,7 +45,7 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ width: "100%", height: "2.4rem" }}>
+    <Box sx={{ width: "100%", height: "2.4rem", bgcolor: "#fff" }}>
       <Box
         sx={{
           borderBottom: 1,
@@ -53,6 +53,7 @@ export default function BasicTabs() {
           height: "2.8rem",
           display: "flex",
           alignItems: "center",
+          bgcolor: "#fff",
         }}
       >
         <Tabs

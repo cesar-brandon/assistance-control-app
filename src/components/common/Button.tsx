@@ -9,6 +9,7 @@ const Style = {
   "&:hover": {
     backgroundColor: "#0092e0",
   },
+  fontWeight: 500,
 };
 
 const Button: React.FC = () => {
