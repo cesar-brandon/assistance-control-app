@@ -5,11 +5,12 @@ import { Header } from "./components/layouts";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route } from "react-router-dom";
 import { PrivateRoutes, PublicRoutes } from "./router/routes";
 import NotFound from "./pages/NotFound";
 import AuthGuard from "./router/guards/auth.guard";
 import { LinearProgress } from "./components/common";
+import RoutesWithNotFound from "./utilities/RoutesWithNotFound";
 
 const darkTheme = createTheme({
   palette: {
@@ -28,12 +29,11 @@ const App: React.FC = () => {
           <Provider store={store}>
             <BrowserRouter>
               <Header />
-              <Routes>
+              <RoutesWithNotFound>
                 <Route
                   path="/"
                   element={<Navigate to={PrivateRoutes.ATTENDANCE} />}
                 />
-                <Route path="*" element={<NotFound />} />
                 <Route path={PublicRoutes.LOGIN} element={<Login />} />
                 <Route element={<AuthGuard />}>
                   <Route
@@ -41,7 +41,7 @@ const App: React.FC = () => {
                     element={<Attendance />}
                   />
                 </Route>
-              </Routes>
+              </RoutesWithNotFound>
             </BrowserRouter>
           </Provider>
         </Suspense>
