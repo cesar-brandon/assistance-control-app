@@ -17,6 +17,7 @@ export interface IStudentAssistance {
   group: string;
   module: string;
   assistances: IAssistance[];
+  status?: string;
 }
 
 export interface IStudentState {

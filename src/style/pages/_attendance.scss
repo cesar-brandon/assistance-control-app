@@ -6,6 +6,10 @@
   display: flex;
   justify-content: center;
 
+  &:focus {
+    outline: none;
+  }
+
   &__register {
     margin-top: 3rem;
     width: 73%;

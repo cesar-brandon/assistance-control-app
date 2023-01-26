@@ -36,8 +36,12 @@ function getChipProps(params: GridRenderCellParams) {
       label: params.value,
       sx: {
         width: "90%",
-        borderColor: green[500],
+        borderColor: green[50],
         color: green[500],
+        bgcolor: green[50],
+        "&:hover": {
+          borderColor: green[500],
+        },
       },
     };
   }
@@ -47,8 +51,12 @@ function getChipProps(params: GridRenderCellParams) {
       label: params.value,
       sx: {
         width: "90%",
-        borderColor: red[500],
+        borderColor: red[50],
         color: red[500],
+        bgcolor: red[50],
+        "&:hover": {
+          borderColor: red[500],
+        },
       },
     };
   }
@@ -139,7 +147,7 @@ const DataGrid: React.FC = () => {
 
   return (
     <div className="DataGrid__content">
-      {!rowsStudents ? (
+      {!rowsStudents || rowsStudents.lenght === 0 ? (
         <Skeleton variant="rounded" width={"100%"} height={"74.8%"} />
       ) : (
         <Box
