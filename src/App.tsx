@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { BrowserRouter, Navigate, Route } from "react-router-dom";
 import { PrivateRoutes, PublicRoutes } from "./router/routes";
-import NotFound from "./pages/NotFound";
 import AuthGuard from "./router/guards/auth.guard";
 import { LinearProgress } from "./components/common";
 import RoutesWithNotFound from "./utilities/RoutesWithNotFound";
