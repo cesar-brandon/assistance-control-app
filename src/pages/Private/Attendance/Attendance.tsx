@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { AttendanceTracker, DataGrid, SearchBar } from "../components/layouts";
-import { Layout, StudentCard } from "../components/common";
-import useStudents from "../hooks/useStudents";
-import { useDispatch, useSelector } from "react-redux";
-import { setStudents, updateStatus } from "../redux/states/student";
-import { updateAssistanceStatus } from "../api/assistance";
+import { useDispatch } from "react-redux";
+import { updateAssistanceStatus } from "../../../api/assistance";
+import { Layout, StudentCard } from "../../../components/common";
+import {
+  AttendanceTracker,
+  DataGrid,
+  SearchBar,
+} from "../../../components/layouts";
+import useStudents from "../../../hooks/useStudents";
+import {
+  selectStudent,
+  setStudents,
+  updateStatus,
+} from "../../../redux/states/student";
 
 const Attendance: React.FC = () => {
   const [searchText, setSearchText] = useState("");
@@ -23,26 +31,16 @@ const Attendance: React.FC = () => {
   dispatch(setStudents(filteredRowsStudents));
 
   const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
-    if (!event.clipboardData) return console.log("No data");
-    setSearchText(event.clipboardData.getData("text/plain"));
-    let status = filteredRowsStudents
-      .filter(
-        (row) => row.id === parseInt(event.clipboardData.getData("text/plain"))
-      )
-      .map((row) => row.status);
-
-    status[0] === "Puntual" ? (status[0] = "Ausente") : (status[0] = "Puntual");
-    console.log(searchText);
-
-    const id = parseInt(searchText);
-    console.log(id, status[0]);
-    const props = {
-      id: id,
-      status: status[0],
-    };
-    updateAssistanceStatus(id, status[0]);
-    dispatch(updateStatus(props));
+    const id = parseInt(event.clipboardData.getData("text/plain"));
+    const student = filteredRowsStudents.filter(
+      (row) => row.id === parseInt(event.clipboardData.getData("text/plain"))
+    )[0];
+    dispatch(selectStudent(student));
+    const status = "Puntual";
+    updateAssistanceStatus(id, status);
+    dispatch(updateStatus({ id, status }));
   };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.keyCode === 8) {
       setSearchText("");

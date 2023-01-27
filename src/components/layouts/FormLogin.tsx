@@ -29,7 +29,7 @@ const FormLogin: React.FC = () => {
     const response = await login(values);
 
     if (response) {
-      navigate(`/${PrivateRoutes.ATTENDANCE}`, { replace: true });
+      navigate("/privado/asistencia", { replace: true });
     }
   };
 

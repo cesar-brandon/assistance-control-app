@@ -3,5 +3,8 @@ export const PublicRoutes = {
 };
 
 export const PrivateRoutes = {
+  PRIVATE: "privado",
   ATTENDANCE: "asistencia",
+  REGISTRATION: "registro",
+  MAINTEINANCE: "mantenimiento",
 };

@@ -17,8 +17,8 @@ const darkTheme = createTheme({
   },
 });
 
-const Attendance = lazy(() => import("./pages/Attendance"));
-const Login = lazy(() => import("./pages/Login"));
+const Private = lazy(() => import("./pages/Private"));
+const Login = lazy(() => import("./pages/Login/Login"));
 
 const App: React.FC = () => {
   return (
@@ -31,13 +31,13 @@ const App: React.FC = () => {
               <RoutesWithNotFound>
                 <Route
                   path="/"
-                  element={<Navigate to={PrivateRoutes.ATTENDANCE} />}
+                  element={<Navigate to={"/privado/asistencia"} />}
                 />
                 <Route path={PublicRoutes.LOGIN} element={<Login />} />
                 <Route element={<AuthGuard />}>
                   <Route
-                    path={`${PrivateRoutes.ATTENDANCE}/*`}
-                    element={<Attendance />}
+                    path={`${PrivateRoutes.PRIVATE}/*`}
+                    element={<Private />}
                   />
                 </Route>
               </RoutesWithNotFound>

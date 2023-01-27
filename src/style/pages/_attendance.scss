@@ -12,7 +12,7 @@
 
   &__register {
     margin-top: 3rem;
-    width: 73%;
+    width: 72%;
     display: grid;
     grid-template:
       "search tracker" 5%
@@ -22,14 +22,26 @@
   }
 }
 
-@media (max-width: $sm) {
+@media (max-width: $lg) {
   .Attendance {
     &__register {
-      width: 80%;
+      width: 90%;
       grid-template:
         "search tracker" 5%
-        "table table" 1fr /
+        "table table" 40rem
+        "card card" 1fr /
         1fr 1fr;
+    }
+  }
+}
+
+@media (max-height: 850px) {
+  .Attendance {
+    &__register {
+      grid-template:
+        "search tracker" 5%
+        "table card" 1fr /
+        1fr 20rem;
     }
   }
 }

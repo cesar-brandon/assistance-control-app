@@ -3,20 +3,31 @@ import Logo from "../../assets/logo-IFV.svg";
 import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
 import { raceColors } from "../layouts/DataGrid";
+import BarcodeExample from "../../assets/barcode-example.png";
+import { IAppStore } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
 const StudentCard: React.FC = () => {
-  const student = useSelector((state: any) => state.student.selectedStudent);
+  const navigate = useNavigate();
+  const student = useSelector(
+    (state: IAppStore) => state.student.selectedStudent
+  );
 
   const specialties: { [key: string]: string } = {
     DS: "Desarrollo de Sistemas de Información",
     ET: "Enfermeria Tecnica",
-    FT: "Farma Tecnica",
+    FT: "Farmacia Tecnica",
     AE: "Administración y Gestión Empresarial",
     CF: "Contabilidad y Finanzas",
   };
 
+  const handleClick = () => {
+    if (!student) return;
+    navigate("/privado/registro");
+  };
+
   return (
-    <div className="StudentCard">
+    <div className="StudentCard" onClick={handleClick}>
       {!student ? (
         <div
           className="StudentCard__specialty"
@@ -56,9 +67,28 @@ const StudentCard: React.FC = () => {
               <strong>{student.lastname}</strong>
               <p>{student.name}</p>
             </div>
+            <div className="StudentCard__student__info">
+              <img src={BarcodeExample} alt="barcode-example" />
+              <p>Código del alumno(a): {student.id}</p>
+            </div>
           </div>
         )}
-        <div className="StudentCard__information"></div>
+      </div>
+      <div className="StudentCard__glass">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"
+          />
+        </svg>
       </div>
     </div>
   );

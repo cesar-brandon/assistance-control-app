@@ -11,17 +11,18 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
 
   const redirectToHome = () => {
-    navigate("/", { replace: true });
+    navigate("/privado/asistencia", { replace: true });
   };
 
   const currentPath = window.location.pathname.slice(1);
+  const isPrivate = currentPath.includes("privado");
 
   return (
     <div className="Header">
       <div className="Header__dashboard">
         <div className="Header__dashboard__home">
           <img src={InsitutoLogo} alt="logo" onClick={redirectToHome} />
-          {currentPath !== PublicRoutes.LOGIN && (
+          {isPrivate && (
             <>
               <p className="slash">/</p>
               <div className="home__user-section">
@@ -49,12 +50,14 @@ const Header: React.FC = () => {
             </>
           )}
         </div>
-        <Clock />
-        <AccountMenu />
+        {isPrivate && (
+          <>
+            <Clock />
+            <AccountMenu />
+          </>
+        )}
       </div>
-      <div className="Header__submenu">
-        {currentPath !== PublicRoutes.LOGIN && <SubMenu />}
-      </div>
+      <div className="Header__submenu">{isPrivate && <SubMenu />}</div>
     </div>
   );
 };

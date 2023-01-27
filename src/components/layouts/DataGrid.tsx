@@ -147,7 +147,7 @@ const DataGrid: React.FC = () => {
 
   return (
     <div className="DataGrid__content">
-      {!rowsStudents || rowsStudents.lenght === 0 ? (
+      {!rowsStudents || rowsStudents.length === 0 ? (
         <Skeleton variant="rounded" width={"100%"} height={"74.8%"} />
       ) : (
         <Box

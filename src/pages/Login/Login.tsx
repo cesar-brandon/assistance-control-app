@@ -1,7 +1,7 @@
 import React from "react";
-import { Layout } from "../components/common";
-import FormLogin from "../components/layouts/FormLogin";
-import ImageLoginIfv from "../assets/image-login-ifv.jpg";
+import { Layout } from "../../components/common";
+import FormLogin from "../../components/layouts/FormLogin";
+import ImageLoginIfv from "../../assets/image-login-ifv.jpg";
 
 const Login: React.FC = () => {
   return (

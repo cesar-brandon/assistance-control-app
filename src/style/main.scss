@@ -17,5 +17,7 @@
 
 // use all pages
 @use "./pages/attendance";
+@use "./pages/maintenance";
+@use "./pages/registration";
 @use "./pages/login";
 @use "./pages/notfound";

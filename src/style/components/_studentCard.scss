@@ -1,3 +1,5 @@
+@use "../abstracts/variables" as *;
+
 .StudentCard {
   width: 100%;
   height: auto;
@@ -11,12 +13,15 @@
 
   border-radius: 50px;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 
   &:hover {
-    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
     span {
-      box-shadow: inset 12px 6px 17px 0px rgba(0, 0, 0, 0.2);
+      background-color: #fff;
+    }
+    .StudentCard__glass {
+      opacity: 1;
+      visibility: visible;
     }
   }
 
@@ -40,12 +45,12 @@
   &__content {
     width: 100%;
     display: grid;
-    padding-top: 2rem;
+    padding-top: 3rem;
   }
 
   &__header {
     width: 100%;
-    height: 8rem;
+    height: 5rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -73,26 +78,24 @@
     gap: 1rem;
     font-size: 1rem;
     text-align: center;
-  }
 
-  &__information {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    &__info {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: end;
+      padding: 2rem;
 
-    .specialty {
-      width: 15rem;
-      padding: 0.5rem 1rem;
-      background-color: #ffc107;
-      color: #000;
-      font-weight: 600;
-      border-radius: 10px;
-      text-align: center;
-    }
-
-    img {
-      width: 8rem;
+      img {
+        width: 13rem;
+      }
+      p {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #999;
+      }
     }
   }
 
@@ -107,5 +110,30 @@
     margin: 1rem 0;
     border: 1px solid rgba(0, 0, 0, 0.1);
     transition: all 300ms;
+    z-index: 20;
+  }
+
+  &__glass {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 300ms;
+    opacity: 0;
+    visibility: hidden;
+
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    svg {
+      color: #fff;
+      width: 3rem;
+    }
   }
 }
