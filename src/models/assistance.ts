@@ -9,3 +9,8 @@ export interface IAssistance {
 export interface IAssistanceState {
   currentAssistance: IAssistance | null;
 }
+
+export interface IAssistanceRegister {
+  status: string;
+  updateAt: string;
+}

@@ -11,10 +11,13 @@
     margin-top: 3rem;
   }
 
-  &__user {
+  &__student {
     width: 25rem;
     height: 30rem;
-    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
   }
   &__assistance {
     width: 100%;

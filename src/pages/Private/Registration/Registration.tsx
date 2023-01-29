@@ -1,8 +1,10 @@
-import { Avatar } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import React from "react";
+import { Avatar, Skeleton } from "@mui/material";
+import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { getAttendancesByStudent } from "../../../api/assistance";
 import { Layout } from "../../../components/common";
+import Chip from "../../../components/common/Chip";
 import { raceColors } from "../../../components/layouts/DataGrid";
 import { IAppStore } from "../../../redux/store";
 
@@ -20,21 +22,52 @@ const style = {
 };
 
 const Registration: React.FC = () => {
+  const [attendances, setAttendances] = React.useState<any[]>([]);
   const student = useSelector(
     (state: IAppStore) => state.student.selectedStudent
   );
   const columns: GridColDef[] = [
     {
+      field: "id",
+      headerName: "ID",
+      width: 70,
+      hide: true,
+    },
+    {
       field: "status",
-      headerName: "Estado de asistencia",
+      headerName: "Registro",
       width: 200,
+      renderCell: (params: GridRenderCellParams) => {
+        return <Chip params={params} />;
+      },
     },
     {
       field: "date",
       headerName: "Fecha",
       width: 200,
     },
+    {
+      field: "time",
+      headerName: "Hora",
+      width: 200,
+    },
   ];
+
+  if (student) {
+    useEffect(() => {
+      getAttendancesByStudent(student.id).then((res) => {
+        const rows = res.map((attendance: any) => ({
+          id: attendance.id,
+          status: attendance.status,
+          date: new Date(attendance.updatedAt).toLocaleDateString(),
+          time: new Date(attendance.updatedAt).toLocaleTimeString(),
+        }));
+
+        setAttendances(rows);
+      });
+    }, []);
+  }
+
   return (
     <Layout title="Registros">
       <div className="Registration">
@@ -62,7 +95,18 @@ const Registration: React.FC = () => {
             )}
           </div>
           <div className="Registration__assistance">
-            <DataGrid sx={style} rows={[]} columns={columns} hideFooter />
+            {attendances.length === 0 ? (
+              <Skeleton variant="rounded" width={"100%"} height={"100%"} />
+            ) : (
+              <DataGrid
+                sx={style}
+                rows={attendances}
+                columns={columns}
+                hideFooter
+                disableSelectionOnClick
+                disableColumnMenu
+              />
+            )}
           </div>
         </div>
       </div>

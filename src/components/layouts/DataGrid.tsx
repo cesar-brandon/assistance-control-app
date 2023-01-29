@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import {
   GridRenderCellParams,
@@ -7,15 +7,11 @@ import {
   GridRowParams,
 } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import {} from "@mui/x-data-grid";
-import Chip from "@mui/material/Chip";
-import DoneIcon from "@mui/icons-material/Done";
-import WarningAmberIcon from "@mui/icons-material/WarningAmber";
-import { red, green } from "@mui/material/colors";
 import { Avatar } from "../common";
 import { selectStudent, updateStatus } from "../../redux/states/student";
 import { updateAssistanceStatus } from "../../api/assistance";
 import { Skeleton } from "@mui/material";
+import Chip from "../common/Chip";
 
 const style = {
   bgcolor: "#fff",
@@ -29,38 +25,6 @@ const style = {
       outline: "none !important",
     },
 };
-function getChipProps(params: GridRenderCellParams) {
-  if (params.value === "Puntual") {
-    return {
-      icon: <DoneIcon color="success" />,
-      label: params.value,
-      sx: {
-        width: "90%",
-        borderColor: green[50],
-        color: green[500],
-        bgcolor: green[50],
-        "&:hover": {
-          borderColor: green[500],
-        },
-      },
-    };
-  }
-  if (params.value === "Ausente") {
-    return {
-      icon: <WarningAmberIcon color="warning" />,
-      label: params.value,
-      sx: {
-        width: "90%",
-        borderColor: red[50],
-        color: red[500],
-        bgcolor: red[50],
-        "&:hover": {
-          borderColor: red[500],
-        },
-      },
-    };
-  }
-}
 
 export const raceColors: { [key: string]: string } = {
   DS: "#FFC107",
@@ -127,14 +91,7 @@ const DataGrid: React.FC = () => {
       headerName: "REGISTRO",
       minWidth: 150,
       renderCell: (params: GridRenderCellParams) => {
-        return (
-          <Chip
-            variant="outlined"
-            size="small"
-            {...getChipProps(params)}
-            onClick={() => handleChipClick(params)}
-          />
-        );
+        return <Chip params={params} action={handleChipClick} />;
       },
     },
   ];
