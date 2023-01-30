@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar as AvatarMui } from "@mui/material/";
 import { GridRenderCellParams } from "@mui/x-data-grid";
-import { raceColors } from "../layouts/DataGrid";
+import { raceColors } from "../../utilities/instituteProperties";
 
 interface Props {
   params: GridRenderCellParams;

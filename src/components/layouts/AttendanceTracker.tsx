@@ -27,10 +27,10 @@ const AttendanceTracker: React.FC = () => {
       <Chip
         sx={{
           color: "#fff",
+          bgcolor: "#4488cc",
           width: "8rem",
         }}
         label={`${addmited} Ingresados`}
-        color="primary"
       />
       <Chip
         sx={{

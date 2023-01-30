@@ -18,14 +18,14 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: "#999",
+  color: "#a1a1aa",
   zIndex: 1,
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   width: "100%",
-  border: "1px solid #ccc",
+  border: "1px solid #d4d4d8",
   borderRadius: "10px",
   backgroundColor: "#fff",
 

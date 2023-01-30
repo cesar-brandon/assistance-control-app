@@ -17,7 +17,7 @@ const darkTheme = createTheme({
   },
 });
 
-const Private = lazy(() => import("./pages/Private"));
+const Private = lazy(() => import("./pages/Private/Private"));
 const Login = lazy(() => import("./pages/Login/Login"));
 
 const App: React.FC = () => {

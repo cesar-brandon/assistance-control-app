@@ -14,8 +14,8 @@ import { Skeleton } from "@mui/material";
 import Chip from "../common/Chip";
 
 const style = {
-  bgcolor: "#fff",
-  boxShadow: "13px 19px 71px -35px rgba(0, 0, 0, 0.75)",
+  bgcolor: "#fafafa",
+  boxShadow: "13px 19px 71px -35px #18181b",
   borderRadius: "10px",
   "& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-cell:focus": {
     outline: "none",
@@ -24,14 +24,6 @@ const style = {
     {
       outline: "none !important",
     },
-};
-
-export const raceColors: { [key: string]: string } = {
-  DS: "#FFC107",
-  ET: "#20c997",
-  FT: "#4488cc",
-  AE: "#c197db",
-  CF: "#DC3545",
 };
 
 const DataGrid: React.FC = () => {

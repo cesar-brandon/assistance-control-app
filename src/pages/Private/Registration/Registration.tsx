@@ -5,8 +5,11 @@ import { useSelector } from "react-redux";
 import { getAttendancesByStudent } from "../../../api/assistance";
 import { Layout } from "../../../components/common";
 import Chip from "../../../components/common/Chip";
-import { raceColors } from "../../../components/layouts/DataGrid";
 import { IAppStore } from "../../../redux/store";
+import {
+  raceColors,
+  specialties,
+} from "../../../utilities/instituteProperties";
 
 const style = {
   bgcolor: "#fff",
@@ -87,9 +90,21 @@ const Registration: React.FC = () => {
                     {`${student.lastname[0]}${student.name[0]}`}
                   </Avatar>
                 </div>
-                <div className="Registration__student__info">
+                <div className="Registration__student__name">
                   <strong>{student.lastname} </strong>
                   <p>{student.name}</p>
+                </div>
+                <div className="Registration__student__info">
+                  <p>
+                    <strong>Especialidad</strong>:
+                    {specialties[student.specialty]}
+                  </p>
+                  <p>
+                    <strong>Grupo</strong>: {student.group}
+                  </p>
+                  <p>
+                    <strong>Modulo</strong>: {student.module}
+                  </p>
                 </div>
               </>
             )}

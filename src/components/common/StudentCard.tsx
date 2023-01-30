@@ -2,24 +2,16 @@ import React from "react";
 import Logo from "../../assets/logo-IFV.svg";
 import { Avatar } from "@mui/material";
 import { useSelector } from "react-redux";
-import { raceColors } from "../layouts/DataGrid";
 import BarcodeExample from "../../assets/barcode-example.png";
 import { IAppStore } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
+import { raceColors, specialties } from "../../utilities/instituteProperties";
 
 const StudentCard: React.FC = () => {
   const navigate = useNavigate();
   const student = useSelector(
     (state: IAppStore) => state.student.selectedStudent
   );
-
-  const specialties: { [key: string]: string } = {
-    DS: "Desarrollo de Sistemas de Información",
-    ET: "Enfermeria Tecnica",
-    FT: "Farmacia Tecnica",
-    AE: "Administración y Gestión Empresarial",
-    CF: "Contabilidad y Finanzas",
-  };
 
   const handleClick = () => {
     if (!student) return;
@@ -29,10 +21,7 @@ const StudentCard: React.FC = () => {
   return (
     <div className="StudentCard" onClick={handleClick}>
       {!student ? (
-        <div
-          className="StudentCard__specialty"
-          style={{ backgroundColor: "#d2d2d2" }}
-        ></div>
+        <div className="StudentCard__specialty"></div>
       ) : (
         <div
           className="StudentCard__specialty"

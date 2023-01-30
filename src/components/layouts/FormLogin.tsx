@@ -1,8 +1,10 @@
 import { Formik, FormikErrors } from "formik";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../api/login";
 import { PrivateRoutes } from "../../router/routes";
 import { Form } from "../common";
+import Alert from "../common/Alert";
 
 export interface IFormLogin {
   email: string;
@@ -22,15 +24,19 @@ const validate = (values: IFormLogin) => {
 };
 
 const FormLogin: React.FC = () => {
+  const [alert, setAlert] = useState(false);
   const initialValues: IFormLogin = { email: "", password: "" };
   const navigate = useNavigate();
 
   const onSubmit = async (values: IFormLogin) => {
-    const response = await login(values);
+    const response = await login(values).catch((error) => {
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 1500);
+    });
 
-    if (response) {
-      navigate("/privado/asistencia", { replace: true });
-    }
+    if (response) navigate("/privado/asistencia", { replace: true });
   };
 
   return (
@@ -65,6 +71,7 @@ const FormLogin: React.FC = () => {
         )}
       </Formik>
       <div className="footer">Instituto Federico Villareal</div>
+      {alert && <Alert message="Usuario o contraseña incorrectos" />}
     </>
   );
 };

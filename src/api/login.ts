@@ -16,7 +16,6 @@ export const login = async (values: ILogin) => {
       return response.data;
     }
   } catch (error) {
-    console.log(error);
     throw error;
   }
 };
