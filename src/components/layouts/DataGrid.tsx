@@ -40,6 +40,7 @@ const DataGrid: React.FC = () => {
 
     dispatch(updateStatus(props));
   };
+
   const columns: GridColDef[] = [
     {
       field: "avatar",
@@ -85,6 +86,7 @@ const DataGrid: React.FC = () => {
       renderCell: (params: GridRenderCellParams) => {
         return <Chip params={params} action={handleChipClick} />;
       },
+      pinnable: true,
     },
   ];
 

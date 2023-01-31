@@ -32,6 +32,8 @@ const Attendance: React.FC = () => {
 
   const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
     const id = parseInt(event.clipboardData.getData("text/plain"));
+    console.log(id);
+
     const student = filteredRowsStudents.filter(
       (row) => row.id === parseInt(event.clipboardData.getData("text/plain"))
     )[0];

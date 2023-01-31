@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, Tab, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "@emotion/styled";
 
 const sx = {
@@ -16,24 +16,6 @@ const sx = {
     display: "flex",
     alignItems: "center",
     bgcolor: "#fff",
-  },
-  tabs: {
-    padding: "0 2rem",
-    "& .MuiTabs-indicator": {
-      display: "flex",
-      justifyContent: "center",
-      backgroundColor: "transparent",
-    },
-    "& .MuiTabs-indicatorSpan": {
-      maxWidth: 40,
-      width: "100%",
-      backgroundColor: "#f38911",
-    },
-  },
-  tab: {
-    fontSize: "0.7rem",
-    fontWeight: "700",
-    fontFamily: "Montserrat",
   },
 };
 
@@ -64,12 +46,15 @@ const StyledTabs = styled((props: StyledTabsProps) => (
 
 interface StyledTabProps {
   label: string;
+  component: {};
+  to: string;
 }
 
 const StyledTab = styled((props: StyledTabProps) => (
   <Tab disableRipple {...props} />
 ))(() => ({
   textTransform: "none",
+  fontFamily: "Montserrat",
   fontWeight: "600",
   fontSize: "0.8rem",
   marginRight: "0.5rem",
@@ -85,21 +70,29 @@ const StyledTab = styled((props: StyledTabProps) => (
   },
 }));
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
 const SubMenu: React.FC = () => {
   const [value, setValue] = useState(0);
+  const location = useLocation();
 
-  const routes = {
-    0: "/privado/asistencia",
-    1: "/privado/registro",
-    2: "/privado/mantenimiento",
+  const routes = [
+    "/privado/asistencia",
+    "/privado/registro",
+    "/privado/mantenimiento",
+  ];
+
+  const a11yProps = (index: number) => {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
   };
+
+  useEffect(() => {
+    const routeIndex = routes.indexOf(location.pathname);
+    if (routeIndex !== -1) {
+      setValue(routeIndex);
+    }
+  }, [location.pathname]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -114,21 +107,18 @@ const SubMenu: React.FC = () => {
           aria-label="submenu tabs"
         >
           <StyledTab
-            sx={sx.tab}
             label="Asistencias"
             component={Link}
             to="/privado/asistencia"
             {...a11yProps(0)}
           />
           <StyledTab
-            sx={sx.tab}
             label="registro"
             component={Link}
             to="/privado/registro"
             {...a11yProps(1)}
           />
           <StyledTab
-            sx={sx.tab}
             label="Mantenimiento"
             component={Link}
             to="/privado/mantenimiento"
