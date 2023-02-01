@@ -19,7 +19,6 @@ export const studentSlice = createSlice({
   reducers: {
     setStudents: (state, action) => {
       const result = {
-        ...state,
         students: action.payload,
       };
       setLocalStorage(LocalStorageTypes.STUDENT, result);
@@ -34,7 +33,7 @@ export const studentSlice = createSlice({
       if (student) {
         student.status = status;
       }
-      setLocalStorage(LocalStorageTypes.STUDENT, state.students);
+      setLocalStorage(LocalStorageTypes.STUDENT, state);
       return state;
     },
     selectStudent: (state, action) => {

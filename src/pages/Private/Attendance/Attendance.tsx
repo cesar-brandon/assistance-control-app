@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateAssistanceStatus } from "../../../api/assistance";
 import { Layout, StudentCard } from "../../../components/common";
+import Alert from "../../../components/common/Alert";
 import {
   AttendanceTracker,
   DataGrid,
   SearchBar,
 } from "../../../components/layouts";
+import useScanDetection from "../../../hooks/useScanDetection";
 import useStudents from "../../../hooks/useStudents";
 import {
   selectStudent,
@@ -15,6 +17,7 @@ import {
 } from "../../../redux/states/student";
 
 const Attendance: React.FC = () => {
+  const [alert, setAlert] = useState({ open: false, message: "", type: "" });
   const [searchText, setSearchText] = useState("");
   const { students } = useStudents();
   const dispatch = useDispatch();
@@ -27,42 +30,57 @@ const Attendance: React.FC = () => {
       row.group.includes(searchText) ||
       row.module.includes(searchText)
   );
+  useEffect(() => {
+    dispatch(setStudents(filteredRowsStudents));
+  }, [filteredRowsStudents]);
 
-  dispatch(setStudents(filteredRowsStudents));
-
-  const handlePaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
-    const id = parseInt(event.clipboardData.getData("text/plain"));
-    console.log(id);
-
+  const handleDetection = (data: any) => {
+    const id = parseInt(data);
     const student = filteredRowsStudents.filter(
-      (row) => row.id === parseInt(event.clipboardData.getData("text/plain"))
+      (student) => student.id === id
     )[0];
+    if (!student) {
+      setAlert({
+        ...alert,
+        open: true,
+        message: "Estudiante no encontrado",
+        type: "error",
+      });
+      setTimeout(() => {
+        setAlert({ ...alert, open: false });
+      }, 1500);
+    }
     dispatch(selectStudent(student));
     const status = "Puntual";
-    updateAssistanceStatus(id, status);
     dispatch(updateStatus({ id, status }));
+    updateAssistanceStatus(id, status);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.keyCode === 8) {
-      setSearchText("");
-    }
-  };
+  useScanDetection({
+    onComplete(code) {
+      handleDetection(code);
+    },
+    onError(error) {
+      setAlert({
+        ...alert,
+        open: true,
+        message: "Error en el detector",
+        type: "error",
+      });
+      console.log(error);
+    },
+  });
 
   return (
     <Layout title="Asistencia">
-      <div
-        className="Attendance"
-        tabIndex={0}
-        onPaste={handlePaste}
-        onKeyDown={handleKeyDown}
-      >
+      <div className="Attendance">
         <div className="Attendance__register">
           <DataGrid />
           <SearchBar setSearchText={setSearchText} />
           <AttendanceTracker />
           <StudentCard />
         </div>
+        {alert.open && <Alert message={alert.message} type={alert.type} />}
       </div>
     </Layout>
   );

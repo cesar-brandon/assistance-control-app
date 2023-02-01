@@ -1,7 +1,8 @@
+@use "../abstracts/variables" as *;
 .Alert {
   position: absolute;
-  bottom: 2rem;
-  left: 50%;
+  right: -8rem;
+  top: 7.5rem;
   transform: translateX(-50%);
   height: 3rem;
   padding: 0 1rem;
@@ -13,10 +14,27 @@
 
   font-weight: 600;
 
-  background-color: #fecaca;
-  color: #ef4444;
+  background-color: $zinc-200;
+  color: $zinc-900;
 
   z-index: 30;
+
+  &.success {
+    background-color: #d1fae5;
+    color: #10b981;
+  }
+  &.warning {
+    background-color: #fef3c7;
+    color: #f59e0b;
+  }
+  &.info {
+    background-color: #bfdbfe;
+    color: #3b82f6;
+  }
+  &.error {
+    background-color: #fecaca;
+    color: #ef4444;
+  }
 
   svg {
     width: 1.5rem;

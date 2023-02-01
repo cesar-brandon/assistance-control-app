@@ -2,11 +2,12 @@ import React from "react";
 
 interface Props {
   message: string;
+  type: string;
 }
 
-const Alert: React.FC<Props> = ({ message }) => {
+const Alert: React.FC<Props> = ({ message, type }) => {
   return (
-    <div className="Alert">
+    <div className={`Alert ${type}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

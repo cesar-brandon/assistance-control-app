@@ -66,10 +66,34 @@
   }
 }
 
+@media (max-width: $xl) {
+  .Login {
+    &__card {
+      height: 30rem;
+      width: 40rem;
+      grid-template-rows: 30rem;
+      margin: 0;
+    }
+
+    &__content_form {
+      padding: 0 1rem;
+      .header {
+        .tittle {
+          font-size: 18px;
+        }
+        .description {
+          width: 12rem;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
 @media (max-width: 768px) {
   .Login {
     &__card {
       grid-template-columns: 1fr;
+      margin: 2rem 2rem 0 2rem;
     }
     &__content_image {
       display: none;

@@ -2,7 +2,6 @@ import { Formik, FormikErrors } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../api/login";
-import { PrivateRoutes } from "../../router/routes";
 import { Form } from "../common";
 import Alert from "../common/Alert";
 
@@ -24,15 +23,20 @@ const validate = (values: IFormLogin) => {
 };
 
 const FormLogin: React.FC = () => {
-  const [alert, setAlert] = useState(false);
+  const [alert, setAlert] = useState({ open: false, message: "", type: "" });
   const initialValues: IFormLogin = { email: "", password: "" };
   const navigate = useNavigate();
 
   const onSubmit = async (values: IFormLogin) => {
     const response = await login(values).catch((error) => {
-      setAlert(true);
+      setAlert({
+        ...alert,
+        open: true,
+        message: "Correo o contraseña invalidos",
+        type: "error",
+      });
       setTimeout(() => {
-        setAlert(false);
+        setAlert({ ...alert, open: false });
       }, 1500);
     });
 
@@ -71,7 +75,7 @@ const FormLogin: React.FC = () => {
         )}
       </Formik>
       <div className="footer">Instituto Federico Villareal</div>
-      {alert && <Alert message="Usuario o contraseña incorrectos" />}
+      {alert.open && <Alert message={alert.message} type={alert.type} />}
     </>
   );
 };
