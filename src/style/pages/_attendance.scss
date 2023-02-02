@@ -22,6 +22,17 @@
   }
 }
 
+@media (max-width: $xxl) {
+  .Attendance {
+    &__register {
+      grid-template:
+        "search tracker" 5%
+        "table card" 1fr /
+        1fr 20rem;
+    }
+  }
+}
+
 @media (max-width: $lg) {
   .Attendance {
     &__register {
