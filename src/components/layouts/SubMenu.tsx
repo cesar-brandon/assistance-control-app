@@ -118,12 +118,6 @@ const SubMenu: React.FC = () => {
             to="/privado/registro"
             {...a11yProps(1)}
           />
-          <StyledTab
-            label="Mantenimiento"
-            component={Link}
-            to="/privado/mantenimiento"
-            {...a11yProps(2)}
-          />
         </StyledTabs>
       </Box>
     </Box>

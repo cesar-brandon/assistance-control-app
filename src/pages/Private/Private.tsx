@@ -13,7 +13,6 @@ const Private: React.FC = () => {
       <Route path="/" element={<Navigate to={PrivateRoutes.PRIVATE} />} />
       <Route path={PrivateRoutes.ATTENDANCE} element={<Attendance />} />
       <Route path={PrivateRoutes.REGISTRATION} element={<Registration />} />
-      <Route path={PrivateRoutes.MAINTEINANCE} element={<Maintenance />} />
     </RoutesWithNotFound>
   );
 };
